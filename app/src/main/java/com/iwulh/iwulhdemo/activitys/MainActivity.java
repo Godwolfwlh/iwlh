@@ -99,18 +99,17 @@ public class MainActivity extends BaseActivity {
 
     @Override
     public void initData() {
-        CallBackUtil CallBackUtil = new MessCallBackUtil();
+        MessCallBackUtil CallBackUtil = new MessCallBackUtil();
         OkhttpUtil.okHttpGet(Constants.JOURNALISM_NEW, CallBackUtil);
-    }
-
-    private void initBottomNavigationBar() {
-//        String NBeanSize = String.valueOf(journalismNBean.getCount());
         mTextBadgeItem = new TextBadgeItem()
                 .setBorderWidth(4)
                 .setBackgroundColorResource(R.color.colorAccent)
                 .setAnimationDuration(200)
-                .setText(String.valueOf(journalismNBean.getCount()))
+                .setText(CallBackUtil.getCount())
                 .setHideOnSelect(false);
+    }
+
+    private void initBottomNavigationBar() {
 
         mShapeBadgeItem = new ShapeBadgeItem()
                 .setShapeColorResource(R.color.colorPrimary)
@@ -125,19 +124,6 @@ public class MainActivity extends BaseActivity {
                 .setInActiveColor("#8e8e8e");//默认未选择颜色;
 //                .setBarBackgroundColor(R.color.Indigo_colorPrimaryDark);//默认背景色
 
-        if (journalismNBean.getCount() == 0) {
-            bottomNavigationBar
-                    .addItem(new BottomNavigationItem(R.mipmap.home_fill, R.string.main_tab_home_string)
-                            .setInactiveIcon(ContextCompat.getDrawable(MainActivity.this, R.mipmap.home_light)))
-                    .addItem(new BottomNavigationItem(R.mipmap.community_fill_light, R.string.main_tab_message_string)
-                            .setInactiveIcon(ContextCompat.getDrawable(MainActivity.this, R.mipmap.community_light)))
-                    .addItem(new BottomNavigationItem(R.mipmap.attention_fill, R.string.main_tab_search_string)
-                            .setInactiveIcon(ContextCompat.getDrawable(MainActivity.this, R.mipmap.attention)))
-                    .addItem(new BottomNavigationItem(R.mipmap.location_fill, R.string.main_tab_setup_string)
-                            .setInactiveIcon(ContextCompat.getDrawable(MainActivity.this, R.mipmap.location)))
-                    .setFirstSelectedPosition(index)//设置默认选择的按钮
-                    .initialise();//所有的设置需在调用该方法前完成
-        } else {
             bottomNavigationBar
                     .addItem(new BottomNavigationItem(R.mipmap.home_fill, R.string.main_tab_home_string)
                             .setInactiveIcon(ContextCompat.getDrawable(MainActivity.this, R.mipmap.home_light)))
@@ -150,7 +136,6 @@ public class MainActivity extends BaseActivity {
                             .setInactiveIcon(ContextCompat.getDrawable(MainActivity.this, R.mipmap.location)))
                     .setFirstSelectedPosition(index)//设置默认选择的按钮
                     .initialise();//所有的设置需在调用该方法前完成
-        }
 
         //默认事务
         getSupportFragmentManager()
@@ -300,7 +285,6 @@ public class MainActivity extends BaseActivity {
     }
 
     private class MessCallBackUtil extends CallBackUtil.CallBackString {
-
         @Override
         public void onFailure(Call call, Exception e) {
             Log.i("TAG", "onFailure：" + e);
@@ -314,7 +298,16 @@ public class MainActivity extends BaseActivity {
                 Gson gson = new Gson();
                 journalismNBean = gson.fromJson(response, JournalismNBean.class);
                 acache.put("JOURNALISM_N_BEAN", journalismNBean, 60 * 60 * 24 * 7);
+                if (journalismNBean.getCount() == 0){
+                    mTextBadgeItem.hide();
+                }else {
+                    mTextBadgeItem.show();
+                }
             }
+        }
+
+        public String getCount(){
+            return String.valueOf(journalismNBean.getCount());
         }
     }
 

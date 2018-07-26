@@ -133,6 +133,7 @@ public class MessageFragment extends BaseFragment {
             journalismList = journalismNBean.getData();
             journalismBean.getData().addAll(journalismList);
             acache.put("JOURNALISM_BEAN", journalismBean, 60 * 60 * 24 * 7);
+            acache.remove("JOURNALISM_N_BEAN");
             showRecyclerView(journalismList);
         } else {
             if (journalismBean != null) {
@@ -180,41 +181,6 @@ public class MessageFragment extends BaseFragment {
         mRecyclerView.setAdapter(messageAdapter);
         messageAdapter.notifyDataSetChanged();
     }
-
-    /*private class MessCallBackUtil extends CallBackUtil.CallBackString {
-        @Override
-        public void onFailure(Call call, Exception e) {
-            Log.i("TAG", "onFailure：" + e);
-            mLoadStatusView.setFailRefresh();
-        }
-
-        @Override
-        public void onResponse(String response) {
-            Log.i("TAG", "onResponse：" + response);
-            if (response.equals("")) {
-                if (journalismBean != null) {
-                    journalismList = journalismBean.getData();
-                    showRecyclerView(journalismList);
-                    mLoadStatusView.setHide();
-                } else {
-                    CallBackUtil CallBackUtil = new MessCallBackUtilAll();
-                    getHttpData(CallBackUtil);
-                }
-            } else {
-                Gson gson = new Gson();
-                journalismNBean = gson.fromJson(response, JournalismNBean.class);
-                journalismList = journalismNBean.getData();
-                journalismBean.getData().addAll(journalismList);
-                acache.put("JOURNALISM_BEAN", journalismBean, 60 * 60 * 24 * 7);
-                showRecyclerView(journalismList);
-                mLoadStatusView.setHide();
-            }
-        }
-    }*/
-
-    /*public void getHttpData(CallBackUtil CallBackUtil) {
-        OkhttpUtil.okHttpGet(Constants.JOURNALISM_ALL, MessCallBackUtilAll);
-    }*/
 
     private class MessCallBackUtilAll extends CallBackUtil.CallBackString {
         @Override
