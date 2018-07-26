@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <in.srain.cube.views.ptr.PtrFrameLayout
+        android:id="@+id/ptr_classic_frame_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorWil" >
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            />
+    </in.srain.cube.views.ptr.PtrFrameLayout>
+
+    <com.iwulh.iwulhdemo.views.LoadStatusView
+        android:id="@+id/lsv_load_status"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        android:background="@color/theme_bg">
+    </com.iwulh.iwulhdemo.views.LoadStatusView>
+
+</android.support.constraint.ConstraintLayout>

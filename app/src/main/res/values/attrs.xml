@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!--图标-->
+    <attr name="icon" format="reference"></attr>
+    <!--渐变颜色-->
+    <attr name="color" format="color"></attr>
+    <!--文本信息-->
+    <attr name="text" format="string"></attr>
+    <!--文字大小-->
+    <attr name="text_size" format="dimension"></attr>
+
+    <declare-styleable name="ChangeIcon">
+        <attr name="icon"></attr>
+        <attr name="color"></attr>
+        <attr name="text"></attr>
+        <attr name="text_size"></attr>
+    </declare-styleable>
+
+    <declare-styleable name="CircleImageView">
+        <attr name="civ_border_width" format="dimension" />
+        <attr name="civ_border_color" format="color" />
+        <attr name="civ_border_overlay" format="boolean" />
+
+        <!-- {@deprecated Use civ_circlebackground_color instead.} -->
+        <attr name="civ_fill_color" format="color" />
+        <attr name="civ_circle_background_color" format="color" />
+    </declare-styleable>
+
+    <!--corner_color 边角颜色，
+        scanner_color 扫描线颜色
+        possible_result_color 扫描点颜色
+        frame_color 扫描框边线颜色
+        mask_color 模糊区域颜色
+        label_text  框上方提示
+    -->
+    <declare-styleable name="ViewfinderView">
+        <attr name="corner_color" format="color"/>
+        <attr name="laser_color" format="color"/>
+        <attr name="frame_color" format="color" />
+        <attr name="mask_color" format="color" />
+        <attr name="result_point_color" format="color"/>
+        <attr name="result_color" format="color" />
+        <attr name="label_text_color" format="color"/>
+        <attr name="label_text" format="string"/>
+        <attr name="label_text_size" format="float"/>
+    </declare-styleable>
+
+    <declare-styleable name="item_view">
+        <attr name="show_bottomline" format="boolean" />
+        <attr name="show_leftimg" format="integer" />
+        <attr name="show_text" format="string" />
+    </declare-styleable>
+
+    <string-array name="storehouse">
+        <item>0,35,12,42,</item>
+        <item>12,42,24,35,</item>
+        <item>24,35,12,28,</item>
+        <item>0,35,12,28,</item>
+        <item>0,21,12,28,</item>
+        <item>12,28,24,21,</item>
+        <item>24,35,24,21,</item>
+        <item>24,21,12,14,</item>
+        <item>0,21,12,14,</item>
+        <item>0,21,0,7,</item>
+        <item>12,14,0,7,</item>
+        <item>12,14,24,7,</item>
+        <item>24,7,12,0,</item>
+        <item>0,7,12,0,</item>
+    </string-array>
+
+    <declare-styleable name="RecyclerView">
+        <attr name="layoutManager" format="string"/>
+        <attr name="android:orientation"/>
+        <attr name="android:descendantFocusability"/>
+        <attr name="spanCount" format="integer"/>
+        <attr name="reverseLayout" format="boolean"/>
+        <attr name="stackFromEnd" format="boolean"/>
+        <attr name="fastScrollEnabled" format="boolean"/>
+        <attr name="fastScrollVerticalThumbDrawable" format="reference"/>
+        <attr name="fastScrollVerticalTrackDrawable" format="reference"/>
+        <attr name="fastScrollHorizontalThumbDrawable" format="reference"/>
+        <attr name="fastScrollHorizontalTrackDrawable" format="reference"/>
+    </declare-styleable>
+
+
+    <dimen name="fastscroll_default_thickness">8dp</dimen>
+    <dimen name="fastscroll_margin">0dp</dimen>
+    <dimen name="fastscroll_minimum_range">50dp</dimen>
+    <dimen name="item_touch_helper_max_drag_scroll_per_frame">20dp</dimen>
+    <dimen name="item_touch_helper_swipe_escape_max_velocity">800dp</dimen>
+    <dimen name="item_touch_helper_swipe_escape_velocity">120dp</dimen>
+    <item name="item_touch_helper_previous_elevation" type="id"/>
+
+</resources>

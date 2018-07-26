@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <com.zhy.android.percent.support.PercentLinearLayout
+        android:id="@+id/top"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_heightPercent="15%w">
+
+        <com.iwulh.iwulhdemo.views.CircleImageView
+            android:id="@+id/message_head_image"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:src="@mipmap/head"
+            app:layout_heightPercent="12%w"
+            app:layout_marginPercent="3%w"
+            app:layout_widthPercent="12%w" />
+
+        <com.zhy.android.percent.support.PercentLinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            app:layout_marginPercent="3%w">
+
+            <TextView
+                android:id="@+id/message_user_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="username"
+                android:textColor="@color/colorOrange"
+                android:textSize="12pt" />
+
+
+            <com.zhy.android.percent.support.PercentLinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/message_user_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="07-06  14:54"
+                    android:textColor="@color/colorGray"
+                    android:textSize="8pt" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="来自"
+                    android:textColor="@color/colorGray"
+                    android:textSize="8pt"
+                    app:layout_marginLeftPercent="3%w" />
+
+                <TextView
+                    android:id="@+id/message_phone_models"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Android客户端"
+                    android:textColor="@color/colorGray"
+                    android:textSize="8pt"
+                    app:layout_marginLeftPercent="3%w" />
+
+            </com.zhy.android.percent.support.PercentLinearLayout>
+
+        </com.zhy.android.percent.support.PercentLinearLayout>
+
+    </com.zhy.android.percent.support.PercentLinearLayout>
+
+    <com.zhy.android.percent.support.PercentLinearLayout
+        android:id="@+id/conn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintTop_toBottomOf="@id/top">
+
+        <TextView
+            android:id="@+id/message_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="title"
+            android:textColor="@color/black"
+            android:textSize="12pt"
+            app:layout_marginLeftPercent="3%w"
+            app:layout_marginRightPercent="3%w" />
+
+        <TextView
+            android:id="@+id/message_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="context"
+            android:textColor="@color/black"
+            android:textSize="14dp"
+            android:visibility="gone"
+            app:layout_marginLeftPercent="3%w"
+            app:layout_marginRightPercent="3%w" />
+
+        <android.support.v7.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/blue"
+            android:visibility="gone"
+            app:layout_marginLeftPercent="3%w"
+            app:layout_marginRightPercent="3%w" />
+
+    </com.zhy.android.percent.support.PercentLinearLayout>
+
+    <com.zhy.android.percent.support.PercentLinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="3dp"
+        android:orientation="horizontal"
+        app:layout_marginBottomPercent="3w%"
+        app:layout_constraintTop_toBottomOf="@id/conn">
+
+        <ImageView
+            android:layout_width="64px"
+            android:layout_height="64px"
+            android:src="@mipmap/forward"
+            app:layout_marginLeftPercent="3%w"
+            app:layout_marginRightPercent="1%w" />
+
+        <TextView
+            android:id="@+id/message_shares"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:text="3000"
+            android:textColor="@color/colorGray"
+            android:textSize="8pt" />
+
+        <View
+            android:layout_width="wrap_content"
+            android:layout_height="1dp"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1" />
+
+        <ImageView
+            android:layout_width="64px"
+            android:layout_height="64px"
+            android:src="@mipmap/comment_light"
+            app:layout_marginLeftPercent="3%w"
+            app:layout_marginRightPercent="1%w" />
+
+        <TextView
+            android:id="@+id/message_comments"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:text="3000"
+            android:textColor="@color/colorGray"
+            android:textSize="8pt" />
+
+        <View
+            android:layout_width="wrap_content"
+            android:layout_height="1dp"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1" />
+
+        <ImageView
+            android:layout_width="64px"
+            android:layout_height="64px"
+            android:src="@mipmap/appreciate_light"
+            app:layout_marginLeftPercent="3%w"
+            app:layout_marginRightPercent="1%w" />
+
+        <TextView
+            android:id="@+id/message_views"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:text="3000"
+            android:textColor="@color/colorGray"
+            android:textSize="8pt"
+            app:layout_marginRightPercent="3%w" />
+
+    </com.zhy.android.percent.support.PercentLinearLayout>
+
+</android.support.constraint.ConstraintLayout>

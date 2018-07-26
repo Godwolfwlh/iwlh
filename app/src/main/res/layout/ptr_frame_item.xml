@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.zhy.android.percent.support.PercentLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+>
+
+    <com.zhy.android.percent.support.PercentLinearLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="horizontal"
+        android:background="@color/colorWil"
+        app:layout_heightPercent="12%w"
+        app:layout_widthPercent="100%w">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:text="@string/user_id_text"
+            android:textSize="16dp"
+            android:textColor="@color/colorOrange"
+            app:layout_marginLeftPercent="3%w"/>
+
+        <TextView
+            android:id="@+id/ptr_item_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:text="180001"
+            android:textSize="16dp"
+            android:textColor="@color/colorFont"
+            app:layout_marginLeftPercent="3%w"/>
+
+    </com.zhy.android.percent.support.PercentLinearLayout>
+
+    <com.zhy.android.percent.support.PercentLinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@color/colorWil">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:text="@string/user_name_text"
+            android:textSize="16dp"
+            android:textColor="@color/transparent"
+            app:layout_marginLeftPercent="4%w"/>
+
+        <TextView
+            android:id="@+id/ptr_item_username"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:text="管理员"
+            android:textSize="16dp"
+            android:textColor="@color/colorFont"
+            app:layout_marginRightPercent="4%w"/>
+
+        <View
+            android:layout_width="wrap_content"
+            android:layout_height="1dp"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:text="@string/user_sex_text"
+            android:textSize="16dp"
+            android:textColor="@color/transparent"
+            app:layout_marginLeftPercent="3%w"/>
+
+        <TextView
+            android:id="@+id/ptr_item_sex"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:text="男"
+            android:textSize="16dp"
+            android:textColor="@color/colorFont"
+            app:layout_marginRightPercent="4%w"/>
+
+    </com.zhy.android.percent.support.PercentLinearLayout>
+
+    <com.zhy.android.percent.support.PercentLinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@color/colorWil"
+        app:layout_marginTopPercent="1%w">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:text="@string/user_login_name_text"
+            android:textSize="16dp"
+            android:textColor="@color/transparent"
+            app:layout_marginLeftPercent="4%w"/>
+
+        <TextView
+            android:id="@+id/ptr_item_login_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:text="admin"
+            android:textSize="16dp"
+            android:textColor="@color/colorFont"
+            app:layout_marginRightPercent="4%w"/>
+
+        <View
+            android:layout_width="wrap_content"
+            android:layout_height="1dp"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:text="@string/user_age_text"
+            android:textSize="16dp"
+            android:textColor="@color/transparent"
+            app:layout_marginLeftPercent="3%w"/>
+
+        <TextView
+            android:id="@+id/ptr_item_age"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:text="23"
+            android:textSize="16dp"
+            android:textColor="@color/colorFont"
+            app:layout_marginRightPercent="4%w"/>
+
+    </com.zhy.android.percent.support.PercentLinearLayout>
+
+    <com.zhy.android.percent.support.PercentLinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@color/colorWil"
+        app:layout_marginTopPercent="1%w">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:text="@string/user_creation_time_text"
+            android:textSize="16dp"
+            android:textColor="@color/transparent"
+            app:layout_marginLeftPercent="4%w"/>
+
+        <TextView
+            android:id="@+id/ptr_item_creation_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:text="2018-05-23 16:04:46"
+            android:textSize="16dp"
+            android:textColor="@color/colorFont"
+            app:layout_marginRightPercent="4%w"/>
+
+    </com.zhy.android.percent.support.PercentLinearLayout>
+
+    <com.zhy.android.percent.support.PercentLinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@color/colorWil"
+        app:layout_marginTopPercent="1%w"
+        app:layout_marginBottomPercent="3%w">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:text="@string/user_updata_time_text"
+            android:textSize="16dp"
+            android:textColor="@color/transparent"
+            app:layout_marginLeftPercent="4%w"/>
+
+        <TextView
+            android:id="@+id/ptr_item_updata_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:text="2018-05-23 16:04:53"
+            android:textSize="16dp"
+            android:textColor="@color/colorFont"
+            app:layout_marginRightPercent="4%w"/>
+
+    </com.zhy.android.percent.support.PercentLinearLayout>
+
+</com.zhy.android.percent.support.PercentLinearLayout>
