@@ -94,22 +94,23 @@ public class MainActivity extends BaseActivity {
         mFragments = new Fragment[]{homeFragment, messageFragment, seekFragment, setupFragment};
         bottomNavigationBar = findById(R.id.bottom_navigation_bar);
         initBottomNavigationBar();
-
     }
 
     @Override
     public void initData() {
         MessCallBackUtil CallBackUtil = new MessCallBackUtil();
         OkhttpUtil.okHttpGet(Constants.JOURNALISM_NEW, CallBackUtil);
+        Log.i("MainLog",String.valueOf(journalismNBean.getCount()));
+    }
+
+    private void initBottomNavigationBar() {
+
         mTextBadgeItem = new TextBadgeItem()
                 .setBorderWidth(4)
                 .setBackgroundColorResource(R.color.colorAccent)
                 .setAnimationDuration(200)
-                .setText(CallBackUtil.getCount())
+                .setText(String.valueOf(journalismNBean.getCount()))
                 .setHideOnSelect(false);
-    }
-
-    private void initBottomNavigationBar() {
 
         mShapeBadgeItem = new ShapeBadgeItem()
                 .setShapeColorResource(R.color.colorPrimary)
@@ -298,16 +299,7 @@ public class MainActivity extends BaseActivity {
                 Gson gson = new Gson();
                 journalismNBean = gson.fromJson(response, JournalismNBean.class);
                 acache.put("JOURNALISM_N_BEAN", journalismNBean, 60 * 60 * 24 * 7);
-                if (journalismNBean.getCount() == 0){
-                    mTextBadgeItem.hide();
-                }else {
-                    mTextBadgeItem.show();
-                }
             }
-        }
-
-        public String getCount(){
-            return String.valueOf(journalismNBean.getCount());
         }
     }
 

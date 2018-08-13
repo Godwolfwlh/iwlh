@@ -131,7 +131,11 @@ public class MessageFragment extends BaseFragment {
         journalismNBean = (JournalismNBean) acache.getAsObject("JOURNALISM_N_BEAN");
         if (journalismNBean != null) {
             journalismList = journalismNBean.getData();
-            journalismBean.getData().addAll(journalismList);
+            if (journalismBean.getData() != null){
+                journalismBean.getData().addAll(journalismList);
+            }else {
+                journalismBean = (JournalismBean) journalismList;
+            }
             acache.put("JOURNALISM_BEAN", journalismBean, 60 * 60 * 24 * 7);
             acache.remove("JOURNALISM_N_BEAN");
             showRecyclerView(journalismList);
