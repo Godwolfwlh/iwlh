@@ -2,6 +2,8 @@ package com.iwulh.iwulhdemo.activitys;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
@@ -55,6 +57,9 @@ public class MainActivity extends BaseActivity {
     private int index = 0;//点击的fragment的下标
     private int currentTabIndex = 0;//当前的fragment的下标
     private ACache acache;
+    private MyHandler handler;
+    private MyThread myThread;
+    private Thread thread;
 
     @Override
     public int intiLayout() {
@@ -94,24 +99,80 @@ public class MainActivity extends BaseActivity {
         mFragments = new Fragment[]{homeFragment, messageFragment, seekFragment, setupFragment};
         bottomNavigationBar = findById(R.id.bottom_navigation_bar);
         initBottomNavigationBar();
+        handler = new MyHandler();
     }
 
     @Override
     public void initData() {
-        MessCallBackUtil CallBackUtil = new MessCallBackUtil();
-        OkhttpUtil.okHttpGet(Constants.JOURNALISM_NEW, CallBackUtil);
-        Log.i("MainLog",String.valueOf(journalismNBean.getCount()));
+        OkhttpUtil.okHttpGet(Constants.JOURNALISM_NEW, new CallBackUtil.CallBackString() {
+            @Override
+            public void onFailure(Call call, Exception e) {
+                Log.i("TAG", "onFailure：" + e);
+                journalismNBean = new JournalismNBean();
+            }
+
+            @Override
+            public void onResponse(String response) {
+                Log.i("TAG", "onResponse：" + response);
+                if (!response.equals("")) {
+                    Gson gson = new Gson();
+                    journalismNBean = gson.fromJson(response, JournalismNBean.class);
+                    acache.put("JOURNALISM_N_BEAN", journalismNBean, 60 * 60 * 24 * 7);
+                    myThread = new MyThread(journalismNBean, journalismNBean.getCount());
+                    thread = new Thread(myThread);
+                    thread.start();
+                }
+            }
+
+        });
+    }
+
+    private class MyThread implements Runnable {
+        private JournalismNBean nBean;
+        private int count;
+
+        public MyThread(JournalismNBean nBean, int count) {
+            this.nBean = nBean;
+            this.count = count;
+        }
+
+        @Override
+        public void run() {
+            //在此处睡眠两秒
+            try {
+                Thread.sleep(2000);  //在此处睡眠两秒
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            Message message = new Message();
+            message.obj = nBean;
+            message.what = count;
+            handler.sendMessage(message);
+        }
+    }
+
+    private class MyHandler extends Handler {
+        @Override
+        public void handleMessage(Message msg) {
+            switch (msg.what) {
+                case 0:
+                    mTextBadgeItem.hide();
+                    break;
+                default:
+                    journalismNBean = (JournalismNBean) msg.obj;
+                    mTextBadgeItem.setBorderWidth(4)
+                            .setBackgroundColorResource(R.color.colorAccent)
+                            .setAnimationDuration(200)
+                            .setText(String.valueOf(journalismNBean.getCount()))
+                            .setHideOnSelect(false).show();
+                    break;
+            }
+            super.handleMessage(msg);
+        }
     }
 
     private void initBottomNavigationBar() {
-
-        mTextBadgeItem = new TextBadgeItem()
-                .setBorderWidth(4)
-                .setBackgroundColorResource(R.color.colorAccent)
-                .setAnimationDuration(200)
-                .setText(String.valueOf(journalismNBean.getCount()))
-                .setHideOnSelect(false);
-
+        mTextBadgeItem = new TextBadgeItem().hide();
         mShapeBadgeItem = new ShapeBadgeItem()
                 .setShapeColorResource(R.color.colorPrimary)
                 .setGravity(Gravity.TOP | Gravity.END)
@@ -125,18 +186,18 @@ public class MainActivity extends BaseActivity {
                 .setInActiveColor("#8e8e8e");//默认未选择颜色;
 //                .setBarBackgroundColor(R.color.Indigo_colorPrimaryDark);//默认背景色
 
-            bottomNavigationBar
-                    .addItem(new BottomNavigationItem(R.mipmap.home_fill, R.string.main_tab_home_string)
-                            .setInactiveIcon(ContextCompat.getDrawable(MainActivity.this, R.mipmap.home_light)))
-                    .addItem(new BottomNavigationItem(R.mipmap.community_fill_light, R.string.main_tab_message_string)
-                            .setInactiveIcon(ContextCompat.getDrawable(MainActivity.this, R.mipmap.community_light))
-                            .setBadgeItem(mTextBadgeItem))
-                    .addItem(new BottomNavigationItem(R.mipmap.attention_fill, R.string.main_tab_search_string)
-                            .setInactiveIcon(ContextCompat.getDrawable(MainActivity.this, R.mipmap.attention)))
-                    .addItem(new BottomNavigationItem(R.mipmap.location_fill, R.string.main_tab_setup_string)
-                            .setInactiveIcon(ContextCompat.getDrawable(MainActivity.this, R.mipmap.location)))
-                    .setFirstSelectedPosition(index)//设置默认选择的按钮
-                    .initialise();//所有的设置需在调用该方法前完成
+        bottomNavigationBar
+                .addItem(new BottomNavigationItem(R.mipmap.home_fill, R.string.main_tab_home_string)
+                        .setInactiveIcon(ContextCompat.getDrawable(MainActivity.this, R.mipmap.home_light)))
+                .addItem(new BottomNavigationItem(R.mipmap.community_fill_light, R.string.main_tab_message_string)
+                        .setInactiveIcon(ContextCompat.getDrawable(MainActivity.this, R.mipmap.community_light))
+                        .setBadgeItem(mTextBadgeItem))
+                .addItem(new BottomNavigationItem(R.mipmap.attention_fill, R.string.main_tab_search_string)
+                        .setInactiveIcon(ContextCompat.getDrawable(MainActivity.this, R.mipmap.attention)))
+                .addItem(new BottomNavigationItem(R.mipmap.location_fill, R.string.main_tab_setup_string)
+                        .setInactiveIcon(ContextCompat.getDrawable(MainActivity.this, R.mipmap.location)))
+                .setFirstSelectedPosition(index)//设置默认选择的按钮
+                .initialise();//所有的设置需在调用该方法前完成
 
         //默认事务
         getSupportFragmentManager()
@@ -282,24 +343,6 @@ public class MainActivity extends BaseActivity {
             String scanResult = bundle.getString(Constants.INTENT_EXTRA_KEY_QR_SCAN);
             //将扫描出的信息显示出来
             Toast.makeText(this, "结果：" + scanResult, Toast.LENGTH_LONG).show();
-        }
-    }
-
-    private class MessCallBackUtil extends CallBackUtil.CallBackString {
-        @Override
-        public void onFailure(Call call, Exception e) {
-            Log.i("TAG", "onFailure：" + e);
-            journalismNBean = new JournalismNBean();
-        }
-
-        @Override
-        public void onResponse(String response) {
-            Log.i("TAG", "onResponse：" + response);
-            if (!response.equals("")) {
-                Gson gson = new Gson();
-                journalismNBean = gson.fromJson(response, JournalismNBean.class);
-                acache.put("JOURNALISM_N_BEAN", journalismNBean, 60 * 60 * 24 * 7);
-            }
         }
     }
 
