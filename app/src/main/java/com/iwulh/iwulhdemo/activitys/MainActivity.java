@@ -118,7 +118,7 @@ public class MainActivity extends BaseActivity {
                     Gson gson = new Gson();
                     journalismNBean = gson.fromJson(response, JournalismNBean.class);
                     acache.put("JOURNALISM_N_BEAN", journalismNBean, 60 * 60 * 24 * 7);
-                    myThread = new MyThread(journalismNBean, journalismNBean.getCount());
+                    myThread = new MyThread(journalismNBean);
                     thread = new Thread(myThread);
                     thread.start();
                 }
@@ -129,11 +129,9 @@ public class MainActivity extends BaseActivity {
 
     private class MyThread implements Runnable {
         private JournalismNBean nBean;
-        private int count;
 
-        public MyThread(JournalismNBean nBean, int count) {
+        public MyThread(JournalismNBean nBean) {
             this.nBean = nBean;
-            this.count = count;
         }
 
         @Override
@@ -146,7 +144,6 @@ public class MainActivity extends BaseActivity {
             }
             Message message = new Message();
             message.obj = nBean;
-            message.what = count;
             handler.sendMessage(message);
         }
     }
@@ -154,20 +151,15 @@ public class MainActivity extends BaseActivity {
     private class MyHandler extends Handler {
         @Override
         public void handleMessage(Message msg) {
-            switch (msg.what) {
-                case 0:
-                    mTextBadgeItem.hide();
-                    break;
-                default:
-                    journalismNBean = (JournalismNBean) msg.obj;
-                    mTextBadgeItem.setBorderWidth(4)
-                            .setBackgroundColorResource(R.color.colorAccent)
-                            .setAnimationDuration(200)
-                            .setText(String.valueOf(journalismNBean.getCount()))
-                            .setHideOnSelect(false).show();
-                    break;
-            }
             super.handleMessage(msg);
+            journalismNBean = (JournalismNBean) msg.obj;
+            if (journalismNBean.getCount() != 0) {
+                mTextBadgeItem.setBorderWidth(4)
+                        .setBackgroundColorResource(R.color.colorAccent)
+                        .setAnimationDuration(200)
+                        .setText(String.valueOf(journalismNBean.getCount()))
+                        .setHideOnSelect(false).show();
+            }
         }
     }
 
